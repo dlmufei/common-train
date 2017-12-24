@@ -2,6 +2,7 @@ package test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.*;
 
 /**
@@ -16,7 +17,10 @@ public class LogTest {
     static {
         try {
             System.out.printf("static block\n");
-            logManager.readConfiguration(new FileInputStream("./logging.properties"));
+//            logManager.readConfiguration(new FileInputStream("./logging.properties"));
+            //Java读取Properties文件的六种方法 http://blog.csdn.net/Senton/article/details/4083127
+            InputStream in = getProperties.class.getResourceAsStream("/logging.properties");//注意配置
+            logManager.readConfiguration(in);
         } catch (IOException exception) {
             logger.log(Level.SEVERE, "Error in loading configuration", exception);
         }
